@@ -16,6 +16,10 @@ RUN set -ex; \
 		apt-get install -y --no-install-recommends dirmngr; \
 	fi; \
 	rm -rf /var/lib/apt/lists/*
+	
+# mrjonestech: Install Percona Xtrabackup
+RUN set -ex; \
+	apt-get install -y --no-install-recommends xtrabackup; \
 
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
