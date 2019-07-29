@@ -18,13 +18,14 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 	
 # mrjonestech: Install Percona Xtrabackup
+ENV DEBIAN_FRONTEND=noninteractive
 RUN set -ex; \
 	apt update; \
-	apt-get install -y wget lsb-release; \
-	wget https://repo.percona.com/apt/percona-release_latest.xenial_all.deb; \
-	dpkg -i percona-release_latest.xenial_all.deb; \
-	apt update; \
-	apt install -y --no-install-recommends xtrabackup; \
+	apt-get install -y wget lsb-release
+RUN	wget https://repo.percona.com/apt/percona-release_latest.xenial_all.deb
+RUN	dpkg -i percona-release_latest.xenial_all.deb
+RUN	apt update
+RUN	apt install -y --no-install-recommends xtrabackup
 #	wget https://www.percona.com/downloads/Percona-XtraBackup-LATEST/Percona-XtraBackup-8.0-6/binary/debian/xenial/x86_64/percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb; \
 #	dpkg -i percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb; \
 
