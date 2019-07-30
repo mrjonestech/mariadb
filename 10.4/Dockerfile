@@ -26,8 +26,8 @@ RUN	wget https://repo.percona.com/apt/percona-release_latest.xenial_all.deb
 RUN	dpkg -i percona-release_latest.xenial_all.deb
 RUN	apt update
 RUN	apt install -y --no-install-recommends xtrabackup
-#	wget https://www.percona.com/downloads/Percona-XtraBackup-LATEST/Percona-XtraBackup-8.0-6/binary/debian/xenial/x86_64/percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb; \
-#	dpkg -i percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb; \
+#	wget https://www.percona.com/downloads/Percona-XtraBackup-LATEST/Percona-XtraBackup-8.0-6/binary/debian/xenial/x86_64/percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb;
+#	dpkg -i percona-xtrabackup-80_8.0.6-1.xenial_amd64.deb;
 
 
 # add gosu for easy step-down from root
@@ -77,6 +77,8 @@ ENV GPG_KEYS \
 # uid           [ unknown] MariaDB Signing Key <signing-key@mariadb.org>
 # sub   rsa4096 2016-03-30 [E]
 	177F4010FE56CA3336300305F1656F24C74CD1D8
+RUN mkdir ~/.gnupg
+RUN echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	for key in $GPG_KEYS; do \
